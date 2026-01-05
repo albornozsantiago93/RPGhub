@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LMS.Application.Logic
 {
-    internal class CourseLogic
+    public class CourseLogic
     {
         public string GetCourseInfo()
         {

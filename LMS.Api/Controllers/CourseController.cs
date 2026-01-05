@@ -11,6 +11,11 @@ namespace LMS.Api.Controllers
 
         private readonly ILogger<CourseController> _logger;
 
+        public CourseController()
+        {
+
+        }
+
         public CourseController(ILogger<CourseController> logger)
         {
             _logger = logger;

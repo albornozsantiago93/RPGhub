@@ -2,7 +2,7 @@
 {
     public class CacheCfg
     {
-        private static IDictionary<CacheKeys, CacheKeyConfig> _keyConfigs = new Dictionary<CacheKeys, CacheKeyConfig>();
+        private static readonly Dictionary<CacheKeys, CacheKeyConfig> _keyConfigs = new Dictionary<CacheKeys, CacheKeyConfig>();
 
         private static object _initLock = new object();
 

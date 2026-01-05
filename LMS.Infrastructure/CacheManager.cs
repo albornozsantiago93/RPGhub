@@ -48,8 +48,8 @@ namespace LMS.Infrastructure
 
         private static string GetCacheKeyName(CacheKeys key, object[] parameters)
         {
-            CacheKeyConfig cfg = null;
-            return GetCacheKeyName(key, out cfg, parameters);
+            ;
+            return GetCacheKeyName(key, out CacheKeyConfig cfg, parameters);
         }
 
         private static string GetCacheKeyName(CacheKeys key, out CacheKeyConfig cfg, object[] parameters)
