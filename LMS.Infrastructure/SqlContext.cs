@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace LMS.Infrastructure
 {
-    internal class SqlContext : DbContext
+    public class SqlContext : DbContext
     {
         public SqlContext(DbContextOptions<SqlContext> options) : base(options) { }
 

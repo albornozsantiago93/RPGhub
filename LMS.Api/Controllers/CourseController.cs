@@ -1,12 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using LMS.Application.Logic;
+using LMS.Common;
 
 namespace LMS.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class CourseController : ControllerBase
+    public class CourseController : BaseController
     {
 
         private readonly ILogger<CourseController> _logger;
@@ -16,7 +17,7 @@ namespace LMS.Api.Controllers
 
         }
 
-        public CourseController(ILogger<CourseController> logger)
+        public CourseController(ILogger<CourseController> logger):this()
         {
             _logger = logger;
         }
