@@ -1,6 +1,6 @@
-using LMS.Application.Logic;
 using LMS.Common;
-using LMS.Infrastructure;
+using LMS.Common.DTOs;
+using LMS.Domain;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
 
@@ -14,15 +14,22 @@ namespace LMS.Api.Controllers
         private static readonly HttpClient Client = new HttpClient();
         private StuffMapper _mapper;
 
-        public StuffController(SqlContext context, IHttpContextAccessor httpContextAccesor) : base(context, new StuffMapper(), httpContextAccesor)
+        public StuffController(ISqlContext context, ILogicProxy logicProxy, IHttpContextAccessor httpContextAccessor)
+            : base(context, new StuffMapper(logicProxy), httpContextAccessor, logicProxy)
         {
-            _mapper = new StuffMapper(Logic);
+            _mapper = new StuffMapper(logicProxy);
         }
 
-        [HttpGet]
-        public IActionResult Get()
+
+        [HttpGet("countries")]
+        public ActionResult<List<CountryModel>> GetCountries()
         {
-            return Ok(new { Message = "Courses retrieved successfully" });
+            List<CountryModel> ret = new List<CountryModel>();
+            List<Country> entity = Logic.StuffLogic.GetCountries();//_mapper.Logic.StuffLogic.GetCountries();
+
+            ret = Mapper.Mapper(CurrentLanguage).Map<List<CountryModel>>(entity);
+
+            return Ok(ret);
         }
     }
 }

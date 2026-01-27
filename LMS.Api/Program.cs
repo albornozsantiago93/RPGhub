@@ -4,6 +4,7 @@ using LMS.Application.Logic;
 using LMS.Common;
 using LMS.Common.Logic;
 using LMS.Infrastructure;
+using Microsoft.AspNetCore.Http;
 
 namespace LMS.Api
 {
@@ -17,10 +18,11 @@ namespace LMS.Api
             builder.Services.AddScoped<ISqlContext, SqlContext>();
             builder.Services.AddScoped<IStuffLogic, StuffLogic>();
             builder.Services.AddScoped<ILogicProxy, LogicProxy>();
+            builder.Services.AddHttpContextAccessor();
+
 
             // Add services to the container.
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 

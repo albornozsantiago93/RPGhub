@@ -16,22 +16,20 @@ namespace LMS.Common
     {
         protected ISqlContext Context { get; }
         private IHttpContextAccessor _httpContextAccesor;
-        
         private ILogicProxy _logic;
-
-
 
         public BaseController()
         {
             
         }
 
-        public BaseController(ISqlContext context, BaseMapper mapper, IHttpContextAccessor httpContextAccessor)
+        public BaseController(ISqlContext context, BaseMapper mapper, IHttpContextAccessor httpContextAccessor, ILogicProxy logic):this()
         {
             string userEmail = string.Empty;
             Context = context;
             Mapper = mapper;
             _httpContextAccesor = httpContextAccessor;
+            _logic = logic;
             mapper.Logic = this.Logic;
 
             if (_httpContextAccesor.HttpContext.User.Claims.Where(x => x.Type == "useremail").SingleOrDefault() != null)
