@@ -39,10 +39,12 @@ namespace LMS.Api.Controllers
 
             // Generar token (ajusta según tu lógica real)
             int ttl = 0;
-            ret.Token = ""; // Lógica real aquí si la tienes
+            ret.Token = Logic.SecurityLogic.GetToken(user, permissions, out ttl);
             ret.TokenExpiration = DateTime.UtcNow.AddMinutes(ttl);
 
             return Ok(ret);
         }
+
+
     }
 }
