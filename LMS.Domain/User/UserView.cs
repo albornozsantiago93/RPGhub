@@ -15,19 +15,18 @@ namespace LMS.Domain
         public string Lastname { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public string ActivationCode { get; set; }
         public int? CountryId { get; set; }
         public string CountryCode { get; set; }
-        public string SourceRef { get; set; }
-        public bool IsModerator { get; set; }
-        public bool Active { get; set; }
-        public string Role { get; set; }
-        public string Picture { get; set; }
+        public string? SourceRef { get; set; }
+        public int IsModerator { get; set; }
+        public int Active { get; set; }
+        public string? Role { get; set; }
+        public string? Picture { get; set; }
         public DateTime? LastLogin { get; set; }
         public bool HasChangesPassword { get; set; }
         public int? Type { get; set; }
-        public string Language { get; set; }
-        public string UserName { get; set; }
+        public string? Language { get; set; }
+        public string? UserName { get; set; }
 
         [NotMapped]
         public string FullName

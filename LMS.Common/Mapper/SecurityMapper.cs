@@ -24,10 +24,13 @@ namespace LMS.Common
             MapperConfigurationExpression config = new MapperConfigurationExpression();
 
             config.CreateMap<UserView, UserModel>()
-                .ForMember(x => x.Picture, opt => opt.MapFrom(x => x.Picture))
+                .ForMember(x => x.IsModerator, opt => opt.MapFrom(x => x.IsModerator == 1))
+                .ForMember(x => x.Active, opt => opt.MapFrom(x => x.Active == 1))
+                .ForMember(x => x.Type, opt => opt.MapFrom(x => x.Type.HasValue ? x.Type.Value.ToString() : null))
+                .ForMember(x => x.Password, opt => opt.Ignore())
                 .ForMember(x => x.IsFirstLogin, opt => opt.MapFrom(x => x.LastLogin == null))
-                .ForMember(x => x.Password, opt => opt.Ignore());
-                //.ForMember(x => x.Type, opt => opt.MapFrom(x => Enum.GetName(typeof(LearningUserType), x.Type)));
+                .ForMember(x => x.Profiles, opt => opt.Ignore())
+                .ForMember(x => x.Permissions, opt => opt.MapFrom(src => src.Permissions == null ? new List<string>() : src.Permissions.Select(p => p.PermissionName.ToString()).ToList()));
 
             return config;
         }

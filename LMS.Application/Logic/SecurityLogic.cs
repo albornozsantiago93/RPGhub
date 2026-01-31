@@ -20,9 +20,9 @@ namespace LMS.Application.Logic
             _context = context;
         }
 
-        public UserView UserViewsGetByEmail(string email)
+        public async Task<UserView> UserViewsGetByEmail(string email)
         {
-            return _context.UserView.Where(x => x.Email == email).FirstOrDefault();
+            return await _context.UserView.Where(x => x.Email == email).FirstOrDefaultAsync();
         }
 
         public async Task<List<PlatformPermission>> GetPermissionsByUserId(Guid userId)
@@ -126,7 +126,7 @@ namespace LMS.Application.Logic
         /// <returns>Token JWT generado como cadena.</returns>
         public string GetToken(UserView user, List<PlatformPermission> permissions, out int ttl)
         {
-            return GetToken(user.CountryId, user.Email, user.FullName, user.Id, user.SourceRef, user.Role, user.IsModerator, permissions, out ttl);
+            return GetToken(user.CountryId, user.Email, user.FullName, user.Id, user.SourceRef, user.Role, bool.Parse(user.IsModerator.ToString()), permissions, out ttl);
         }
 
     }

@@ -12,17 +12,15 @@ namespace LMS.Common
             Profiles = new List<ProfileModel>();
             Permissions = new List<string>();
         }
+
         public Guid Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string Firstname { get; set; }
+        public string Lastname { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public string PasswordConfirm { get; set; }
         public string Token { get; set; }
         public DateTime TokenExpiration { get; set; }
-        public string CountryCode { get; set; }
         public string Role { get; set; }
-        public List<string> Permissions { get; set; }
         public bool IsModerator { get; set; }
         public string Picture { get; set; }
         public bool IsFirstLogin { get; set; }
@@ -30,6 +28,8 @@ namespace LMS.Common
         public string Type { get; set; }
         public string Language { get; set; }
         public string UserName { get; set; }
+        public bool Active { get; internal set; }
+        public List<string> Permissions { get; set; }
     }
 
     public class ProfileModel
