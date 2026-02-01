@@ -32,6 +32,8 @@ namespace LMS.Api.Controllers
             if (user == null || user.Password != credentials.Password)
                 return Unauthorized("Usuario o contraseña inválidos");
 
+            string passwordHased = Encrypt.GetSHA256(credentials.Password);//Falta encriptar la contraseña recibida y compararla con la de la BD
+
             //Falta SP para obtener roles y permisos
             var permissions = await Logic.SecurityLogic.GetPermissionsByUserId(user.Id);
             var roles = new List<string> { user.Role };
@@ -44,6 +46,15 @@ namespace LMS.Api.Controllers
 
             return Ok(ret);
         }
+
+        [HttpGet("hashFactory")]
+        [EnableCors]
+        [AllowAnonymous]
+        public async Task<ActionResult> HashFactory(string passToHash)
+        {
+            return Ok(Encrypt.GetSHA256(passToHash));
+        }
+
 
 
     }
