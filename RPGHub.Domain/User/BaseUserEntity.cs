@@ -11,6 +11,13 @@ namespace RPGHub.Domain
 {
     public class BaseUserEntity
     {
+        public BaseUserEntity()
+        {
+            CreatedDate = DateTime.UtcNow;
+            CreatedUser = "SYSTEM";
+            ModifiedUser = "SYSTEM";
+            Language = "EN";
+        }
         [Key]
         public Guid Id { get; set; }
         [Column(TypeName = "Varchar(100)")]

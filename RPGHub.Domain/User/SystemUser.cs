@@ -10,6 +10,27 @@ namespace RPGHub.Domain
 {
     public class SystemUser : BaseUserEntity
     {
+        public SystemUser()
+        {
+            Characters = new List<Character>();
+            SessionsOwned = new HashSet<GameSession>();
+            SessionJoined = new List<GameSession>();
+            GameSessions = new List<GameSessionParticipant>();
+        }
+
+        public SystemUser(string firstname, string lastname, string email, DateTime? birthDate, string username, Country country, string language, string picture, string password) :this()
+        {
+            Firstname = firstname;
+            Lastname = lastname;
+            Email = email;
+            BirthDate = birthDate;
+            Username = username;
+            Country = country;
+            Language = language;
+            Picture = picture;
+            Password = password;
+        }
+
         [InverseProperty("SystemUser")]
         public virtual List<SystemUserPlatformPermision> Permissions { get; set; }
         [Column(TypeName = "Int")]
@@ -26,7 +47,7 @@ namespace RPGHub.Domain
         public virtual List<GameSession> SessionJoined { get; set; }
 
         [InverseProperty("SystemUser")]
-        public virtual ICollection<GameSessionParticipant> GameSessions { get; set; }
+        public virtual List<GameSessionParticipant> GameSessions { get; set; }
 
     }
 

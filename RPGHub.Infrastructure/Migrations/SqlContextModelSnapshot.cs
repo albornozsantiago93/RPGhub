@@ -65,7 +65,7 @@ namespace RPGHub.Infrastructure.Migrations
 
                     b.HasIndex("OwnerId");
 
-                    b.ToTable("Character");
+                    b.ToTable("Character", (string)null);
                 });
 
             modelBuilder.Entity("RPGHub.Domain.ChatMessage", b =>
@@ -93,7 +93,7 @@ namespace RPGHub.Infrastructure.Migrations
 
                     b.HasIndex("SenderId");
 
-                    b.ToTable("ChatMessage");
+                    b.ToTable("ChatMessage", (string)null);
                 });
 
             modelBuilder.Entity("RPGHub.Domain.Country", b =>
@@ -129,7 +129,7 @@ namespace RPGHub.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Country");
+                    b.ToTable("Country", (string)null);
                 });
 
             modelBuilder.Entity("RPGHub.Domain.GameSession", b =>
@@ -168,7 +168,7 @@ namespace RPGHub.Infrastructure.Migrations
 
                     b.HasIndex("SystemUserId");
 
-                    b.ToTable("GameSession");
+                    b.ToTable("GameSession", (string)null);
                 });
 
             modelBuilder.Entity("RPGHub.Domain.GameSessionParticipant", b =>
@@ -208,7 +208,7 @@ namespace RPGHub.Infrastructure.Migrations
 
                     b.HasIndex("SystemUserId");
 
-                    b.ToTable("GameSessionParticipant");
+                    b.ToTable("GameSessionParticipant", (string)null);
                 });
 
             modelBuilder.Entity("RPGHub.Domain.Invitation", b =>
@@ -251,7 +251,7 @@ namespace RPGHub.Infrastructure.Migrations
 
                     b.HasIndex("InvitedUserId");
 
-                    b.ToTable("Invitation");
+                    b.ToTable("Invitation", (string)null);
                 });
 
             modelBuilder.Entity("RPGHub.Domain.LearningUser", b =>
@@ -313,7 +313,7 @@ namespace RPGHub.Infrastructure.Migrations
 
                     b.HasIndex("CountryId");
 
-                    b.ToTable("LearningUser");
+                    b.ToTable("LearningUser", (string)null);
                 });
 
             modelBuilder.Entity("RPGHub.Domain.Log", b =>
@@ -360,7 +360,7 @@ namespace RPGHub.Infrastructure.Migrations
 
                     b.HasIndex("GameSessionId");
 
-                    b.ToTable("Log");
+                    b.ToTable("Log", (string)null);
                 });
 
             modelBuilder.Entity("RPGHub.Domain.PlatformPermission", b =>
@@ -394,7 +394,7 @@ namespace RPGHub.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PlatformPermission");
+                    b.ToTable("PlatformPermission", (string)null);
                 });
 
             modelBuilder.Entity("RPGHub.Domain.Stuff.State", b =>
@@ -414,7 +414,7 @@ namespace RPGHub.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("State");
+                    b.ToTable("State", (string)null);
                 });
 
             modelBuilder.Entity("RPGHub.Domain.SystemUser", b =>
@@ -493,7 +493,7 @@ namespace RPGHub.Infrastructure.Migrations
 
                     b.HasIndex("CountryId");
 
-                    b.ToTable("SystemUser");
+                    b.ToTable("SystemUser", (string)null);
                 });
 
             modelBuilder.Entity("RPGHub.Domain.SystemUserPlatformPermision", b =>
@@ -530,7 +530,7 @@ namespace RPGHub.Infrastructure.Migrations
 
                     b.HasIndex("SystemuserId");
 
-                    b.ToTable("SystemUserPlatformPermision");
+                    b.ToTable("SystemUserPlatformPermision", (string)null);
                 });
 
             modelBuilder.Entity("RPGHub.Domain.UserView", b =>
@@ -591,7 +591,7 @@ namespace RPGHub.Infrastructure.Migrations
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("UserView");
+                    b.ToTable("UserView", (string)null);
                 });
 
             modelBuilder.Entity("RPGHub.Domain.Character", b =>

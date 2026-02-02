@@ -20,5 +20,10 @@ namespace RPGHub.Application.Logic
             return await _context.Country.OrderBy(x => x).ToListAsync();
         }
 
+        public async Task<Country> GetCountryById(int id)
+        {
+            return await _context.Country.Where(x => x.Id == id).FirstOrDefaultAsync();
+        }
+
     }
 }

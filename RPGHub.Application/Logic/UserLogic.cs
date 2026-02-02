@@ -1,4 +1,7 @@
-﻿using RPGHub.Common.Logic;
+﻿using Microsoft.EntityFrameworkCore;
+using RPGHub.Common;
+using RPGHub.Common.Logic;
+using RPGHub.Domain;
 using RPGHub.Infrastructure;
 
 namespace RPGHub.Application.Logic
@@ -12,9 +15,17 @@ namespace RPGHub.Application.Logic
             _context = context;
         }
 
-        public string GetCourseInfo()
+        public async Task <bool> UserExist(string email)
         {
-            return "Course information retrieved successfully.";
+            return await _context.SystemUser.Where(x => x.Email == email).FirstOrDefaultAsync() != null;
+        }
+
+        public SystemUser UserCreate(SystemUser user)
+        {
+            _context.SystemUser.Add(user);
+            _context.SaveChanges();
+
+            return user;
         }
 
 

@@ -1,5 +1,7 @@
 using RPGHub.Common;
 using Microsoft.AspNetCore.Mvc;
+using RPGHub.Domain;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RPGHub.Api.Controllers
 {
@@ -18,10 +20,17 @@ namespace RPGHub.Api.Controllers
             _mapper = new UserMapper(logicProxy);
         }
 
-        [HttpGet]
-        public IActionResult GetCourse()
+        [AllowAnonymous]
+        [HttpPost()]
+        public async Task<ActionResult> CreateUser(CreateUserModel model)
         {
-            return Ok(new { Message = "Courses retrieved successfully" });
+            if (await Logic.UserLogic.UserExist(model.Email)) return BadRequest("El usuario ya existe");
+
+            SystemUser systemUser = await _mapper.MapUserModelToEntity(model, CurrentLanguage);
+
+            Logic.UserLogic.UserCreate(systemUser);
+
+            return Ok();
         }
 
     }
