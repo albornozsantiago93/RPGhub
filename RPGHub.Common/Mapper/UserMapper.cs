@@ -21,11 +21,14 @@ namespace RPGHub.Common
         }
 
 
-        protected MapperConfigurationExpression GetMapperConfigurationExpression(string language)
+        protected override MapperConfigurationExpression GetMapperConfigurationExpression(string language)
         {
             MapperConfigurationExpression config = new MapperConfigurationExpression();
 
             config.CreateMap<Country, CountryModel>();
+            config.CreateMap<SystemUser, GetUserModel>()
+                .ForMember(dest => dest.Country, opt => opt.MapFrom(src => src.Country != null ? src.Country.Name : null));
+
 
             return config;
         }

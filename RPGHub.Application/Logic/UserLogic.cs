@@ -28,6 +28,12 @@ namespace RPGHub.Application.Logic
             return user;
         }
 
+        public Task<SystemUser> GetUserById(Guid userId)
+        {
+            return _context.SystemUser.Where(x => x.Id == userId).FirstOrDefaultAsync();
+        }
+
+
 
     }
 }

@@ -33,5 +33,16 @@ namespace RPGHub.Api.Controllers
             return Ok();
         }
 
+        [AllowAnonymous]
+        [HttpGet("{userId}")]
+        public async Task<ActionResult<GetUserModel>> GetUserById(Guid userId)
+        {
+            SystemUser user = await Logic.UserLogic.GetUserById(userId);
+
+            GetUserModel model = _mapper.MapTo<GetUserModel>(user, CurrentLanguage);
+
+            return Ok(model);
+        }
+
     }
 }
