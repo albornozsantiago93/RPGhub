@@ -3,11 +3,11 @@ using RPGHub.Infrastructure;
 
 namespace RPGHub.Application.Logic
 {
-    public class CourseCfgLogic : ICourseCfgLogic
+    public class UserLogic : IUserLogic
     {
         private SqlContext _context;
 
-        public CourseCfgLogic(SqlContext context)
+        public UserLogic(SqlContext context)
         {
             _context = context;
         }

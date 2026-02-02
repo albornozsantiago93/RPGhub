@@ -2,7 +2,7 @@
 
 namespace RPGHub.Common.Logic
 {
-    public interface ICourseCfgLogic
+    public interface IUserLogic
     {
         public string GetCourseInfo();
 

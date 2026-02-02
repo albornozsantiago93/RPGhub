@@ -6,7 +6,7 @@ namespace RPGHub.Common
     public interface ILogicProxy
     {
         public IStuffLogic  StuffLogic { get; }
-        public ICourseCfgLogic CourseCfgLogic { get; }
+        public IUserLogic UserLogic { get; }
         public ISecurityLogic SecurityLogic { get; }    
     }
 }

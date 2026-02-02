@@ -11,7 +11,6 @@ namespace RPGHub.Domain
     {
         [Key]
         public Guid Id { get; set; }
-
         public Guid GameSessionId { get; set; }
         public virtual GameSession Session { get; set; }
         public Guid SenderId { get; set; }
