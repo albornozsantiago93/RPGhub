@@ -9,6 +9,17 @@ namespace RPGHub.Domain
 {
     public class Character
     {
+        public Character()
+        {
+            
+        }
+        public Character(string name, string picture, Class classAux, Race race)
+        {
+            Name  = name;
+            Picture = picture;
+            Class = classAux;
+            Race = race;
+        }
         [Key]
         public Guid Id { get; set; }
 
@@ -17,6 +28,7 @@ namespace RPGHub.Domain
         public Class Class { get; set; }
         public Race Race { get; set; }
         public int Level { get; set; } = 1;
+        public string Picture { get; set; }
 
         // JSON
         public string Stats { get; set; }
@@ -25,7 +37,6 @@ namespace RPGHub.Domain
         // FK
         public Guid OwnerId { get; set; }
         public virtual SystemUser Owner { get; set; }
-
         public Guid GameSessionId { get; set; }
         public virtual GameSession Session { get; set; }
     }

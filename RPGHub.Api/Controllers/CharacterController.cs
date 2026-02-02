@@ -1,5 +1,7 @@
-using RPGHub.Common;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using RPGHub.Common;
+using RPGHub.Domain;
 
 namespace RPGHub.Api.Controllers
 {
@@ -18,11 +20,24 @@ namespace RPGHub.Api.Controllers
             _mapper = new CharacterMapper(logicProxy);
         }
 
-        [HttpGet]
-        public IActionResult GetCourse()
+        [HttpPost()]
+        public async Task<ActionResult> CreateCharacter(CreateCharacterModel model)
         {
-            return Ok(new { Message = "Courses retrieved successfully" });
+            Character character = await _mapper.MapCharacterModelToEntity(model, CurrentLanguage);
+
+            //Logic.CharacterLogic.CharacterCreate(character);
+
+            return Ok();
         }
 
+        //[HttpGet("{userId}")]
+        //public async Task<ActionResult<GetUserModel>> GetUserById(Guid userId)
+        //{
+        //    SystemUser user = await Logic.UserLogic.GetUserById(userId);
+
+        //    GetUserModel model = _mapper.MapTo<GetUserModel>(user, CurrentLanguage);
+
+        //    return Ok(model);
+        //}
     }
 }

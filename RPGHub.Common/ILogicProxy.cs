@@ -7,6 +7,7 @@ namespace RPGHub.Common
     {
         public IStuffLogic  StuffLogic { get; }
         public IUserLogic UserLogic { get; }
-        public ISecurityLogic SecurityLogic { get; }    
+        public ISecurityLogic SecurityLogic { get; }
+        public ICharacterLogic CharacterLogic { get; }
     }
 }

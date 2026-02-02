@@ -19,13 +19,20 @@ namespace RPGHub.Common
             Logic = logic;
         }
 
-        protected MapperConfigurationExpression GetMapperConfigurationExpression(string language)
+
+        protected override MapperConfigurationExpression GetMapperConfigurationExpression(string language)
         {
             MapperConfigurationExpression config = new MapperConfigurationExpression();
 
             //config.CreateMap<Country, CountryModel>();
 
             return config;
+        }
+        public async Task<Character> MapCharacterModelToEntity(CreateCharacterModel model, string currentLanguage)
+        {
+            Character character = new Character(model.Name, model.Picture, (Class)model.Class, (Race)model.Race);
+
+            return character;
         }
     }
 }
