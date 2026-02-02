@@ -13,9 +13,9 @@ namespace RPGHub.Domain
         public Guid Id { get; set; }
 
         public Guid GameSessionId { get; set; }
-        public GameSession Session { get; set; }
+        public virtual GameSession Session { get; set; }
         public Guid SenderId { get; set; }
-        public SystemUser Sender { get; set; }
+        public virtual SystemUser Sender { get; set; }
         [Required]
         public string Message { get; set; }
         public DateTime SentDate { get; set; } = DateTime.UtcNow;

@@ -11,10 +11,10 @@ namespace RPGHub.Domain
     {
         public Guid GameSessionId { get; set; }
         [ForeignKey(nameof(GameSessionId))]
-        public GameSession GameSession { get; set; }
+        public virtual GameSession GameSession { get; set; }
         public Guid SystemUserId { get; set; }
         [ForeignKey(nameof(SystemUserId))]
-        public SystemUser SystemUser { get; set; }
+        public virtual SystemUser SystemUser { get; set; }
         public DateTime JoinedAt { get; set; } = DateTime.UtcNow;
     }
 }

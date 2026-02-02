@@ -32,6 +32,14 @@ namespace RPGHub.Infrastructure
                 entity.HasNoKey();
                 entity.ToView("UserView"); // El nombre de la vista en la base de datos
             });
+
+            modelBuilder.Entity<GameSession>()
+                .HasOne(gs => gs.Master)
+                .WithMany(su => su.SessionsOwned)
+                .HasForeignKey(gs => gs.MasterId)
+                .OnDelete(DeleteBehavior.Restrict
+            ); // O el comportamiento que prefieras
+
         }
 
         #region Entities
@@ -40,6 +48,14 @@ namespace RPGHub.Infrastructure
         public DbSet<PlatformPermission> PlatformPermission { get; set; }
         public DbSet<SystemUser> SystemUser { get; set; }
         public DbSet<LearningUser> LearningUser { get; set; }
+        public DbSet<GameSession> GameSession { get; set; }
+        public DbSet<Character> Character { get; set; }
+        public DbSet<Invitation> Invitation { get; set; }
+        public DbSet<ChatMessage> ChatMessage { get; set; }
+        public DbSet<GameSessionParticipant> GameSessionParticipant { get; set; }
+        public DbSet<Log> Log { get; set; }
+
+
         #endregion
 
         #region Views

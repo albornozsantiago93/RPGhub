@@ -10,8 +10,6 @@ namespace RPGHub.Domain
 {
     public class SystemUser : BaseUserEntity
     {
-        [Key]
-        public Guid UserId { get; set; }
         [InverseProperty("SystemUser")]
         public virtual List<SystemUserPlatformPermision> Permissions { get; set; }
         [Column(TypeName = "Int")]
@@ -23,11 +21,12 @@ namespace RPGHub.Domain
         public RoleType Role { get; set; }
         public DateTime? DateJoined { get; set; }
         public virtual List<Character> Characters { get; set; }
-        public virtual List<GameSession> SessionOwned { get; set; }
+        [InverseProperty("Master")]
+        public virtual ICollection<GameSession> SessionsOwned { get; set; }
         public virtual List<GameSession> SessionJoined { get; set; }
 
         [InverseProperty("SystemUser")]
-        public ICollection<GameSessionParticipant> GameSessions { get; set; }
+        public virtual ICollection<GameSessionParticipant> GameSessions { get; set; }
 
     }
 

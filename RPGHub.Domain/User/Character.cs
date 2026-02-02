@@ -24,10 +24,10 @@ namespace RPGHub.Domain
 
         // FK
         public Guid OwnerId { get; set; }
-        public SystemUser Owner { get; set; }
+        public virtual SystemUser Owner { get; set; }
 
         public Guid GameSessionId { get; set; }
-        public GameSession Session { get; set; }
+        public virtual GameSession Session { get; set; }
     }
 
 }

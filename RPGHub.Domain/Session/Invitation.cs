@@ -10,9 +10,9 @@ namespace RPGHub.Domain
     public class Invitation : BaseEntity
     {
         public Guid GameSessionId { get; set; }
-        public GameSession Session { get; set; }
+        public virtual GameSession Session { get; set; }
         public Guid InvitedUserId { get; set; }
-        public SystemUser InvitedUser { get; set; }
+        public virtual SystemUser InvitedUser { get; set; }
         public InvitationStatus Status { get; set; } = InvitationStatus.Pending;
         public DateTime SentDate { get; set; } = DateTime.UtcNow;
     }
