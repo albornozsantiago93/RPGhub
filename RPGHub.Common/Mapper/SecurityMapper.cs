@@ -24,9 +24,6 @@ namespace RPGHub.Common
             MapperConfigurationExpression config = new MapperConfigurationExpression();
 
             config.CreateMap<UserView, UserModel>()
-                .ForMember(x => x.IsModerator, opt => opt.MapFrom(x => x.IsModerator == 1))
-                .ForMember(x => x.Active, opt => opt.MapFrom(x => x.Active == 1))
-                .ForMember(x => x.Type, opt => opt.MapFrom(x => x.Type.HasValue ? x.Type.Value.ToString() : null))
                 .ForMember(x => x.Password, opt => opt.Ignore())
                 .ForMember(x => x.IsFirstLogin, opt => opt.MapFrom(x => x.LastLogin == null))
                 .ForMember(x => x.Profiles, opt => opt.Ignore())

@@ -17,14 +17,9 @@ namespace RPGHub.Domain
         public string Password { get; set; }
         public int? CountryId { get; set; }
         public string CountryCode { get; set; }
-        public string? SourceRef { get; set; }
-        public int IsModerator { get; set; }
-        public int Active { get; set; }
-        public string? Role { get; set; }
+        public int? Role { get; set; }
         public string? Picture { get; set; }
         public DateTime? LastLogin { get; set; }
-        public bool HasChangesPassword { get; set; }
-        public int? Type { get; set; }
         public string? Language { get; set; }
         public string? UserName { get; set; }
 

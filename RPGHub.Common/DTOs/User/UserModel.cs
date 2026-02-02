@@ -20,15 +20,12 @@ namespace RPGHub.Common
         public string Password { get; set; }
         public string Token { get; set; }
         public DateTime TokenExpiration { get; set; }
-        public string Role { get; set; }
-        public bool IsModerator { get; set; }
+        public int? Role { get; set; }
         public string Picture { get; set; }
         public bool IsFirstLogin { get; set; }
         public List<ProfileModel> Profiles { get; set; }
-        public string Type { get; set; }
         public string Language { get; set; }
         public string UserName { get; set; }
-        public bool Active { get; internal set; }
         public List<string> Permissions { get; set; }
     }
 

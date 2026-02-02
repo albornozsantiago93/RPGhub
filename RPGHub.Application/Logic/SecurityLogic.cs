@@ -50,8 +50,6 @@ namespace RPGHub.Application.Logic
             string userEmail,
             string userFullName,
             Guid userIdentifier,
-            string sourceRef,
-            string role,
             bool moderatorPermission,
             List<PlatformPermission> permissions,
             out int ttl)
@@ -60,7 +58,7 @@ namespace RPGHub.Application.Logic
             var tokenHandler = new JwtSecurityTokenHandler();
 
             var key = Encoding.ASCII.GetBytes(ApiConfiguration.GetConfig("Tokens:Key"));
-            List<Claim> claims = GetClaims(countryId, userEmail, userFullName, userIdentifier, sourceRef, role, moderatorPermission, permissions);
+            List<Claim> claims = GetClaims(countryId, userEmail, userFullName, userIdentifier, moderatorPermission, permissions);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             { 
@@ -92,8 +90,6 @@ namespace RPGHub.Application.Logic
             string userEmail,
             string userFullName,
             Guid userIdentifier,
-            string sourceRef,
-            string role,
             bool moderatorPermission,
             List<PlatformPermission> permissions)
         {
@@ -102,7 +98,6 @@ namespace RPGHub.Application.Logic
                 new Claim("useremail", userEmail),
                 new Claim("userfullname", userFullName),
                 new Claim("userguid", userIdentifier.ToString()),
-                new Claim("rpghubrole", role),
                 new Claim("moderatorpermission", moderatorPermission.ToString())
             };
 
@@ -128,7 +123,7 @@ namespace RPGHub.Application.Logic
         /// <returns>Token JWT generado como cadena.</returns>
         public string GetToken(UserView user, List<PlatformPermission> permissions, out int ttl)
         {
-            return GetToken(user.CountryId, user.Email, user.FullName, user.Id, user.SourceRef, user.Role, true, permissions, out ttl);
+            return GetToken(user.CountryId, user.Email, user.FullName, user.Id, true, permissions, out ttl);
         }
 
     }

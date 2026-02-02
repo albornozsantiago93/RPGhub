@@ -36,7 +36,7 @@ namespace RPGHub.Api.Controllers
 
             //Falta SP para obtener roles y permisos
             var permissions = await Logic.SecurityLogic.GetPermissionsByUserId(user.Id);
-            var roles = new List<string> { user.Role };
+            var roles = new List<string> { user.Role.ToString() };
 
             var ret = _mapper.MapToUserModel(user, roles, permissions, CurrentLanguage);
 
