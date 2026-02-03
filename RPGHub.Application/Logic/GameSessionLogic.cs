@@ -15,6 +15,11 @@ namespace RPGHub.Application.Logic
             _context = context;
         }
 
+        public async Task CreateGameSession(GameSession gameSession, Guid userId)
+        {
+            _context.GameSession.Add(gameSession);
+            _context.SaveChangesAsync();
+        }
 
     }
 }

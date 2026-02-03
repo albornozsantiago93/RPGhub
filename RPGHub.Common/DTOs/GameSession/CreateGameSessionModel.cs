@@ -14,6 +14,5 @@ namespace RPGHub.Common
         public int GameType { get; set; }
         public DateTime ScheduleDate { get; set; }
 
-
     }
 }

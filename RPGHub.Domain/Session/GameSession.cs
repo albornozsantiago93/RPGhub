@@ -12,6 +12,24 @@ namespace RPGHub.Domain
 {
     public class GameSession 
     {
+        public GameSession()
+        {
+            Characters = new List<Character>();
+            Invitations = new List<Invitation>();
+            Chat = new List<ChatMessage>();
+            Logs = new List<Log>();
+            Participants = new List<GameSessionParticipant>();
+            CreatedDate = DateTime.UtcNow;
+        }
+
+        public GameSession(string title, string description, DateTime scheduleDate, GameStatus status):this()
+        {
+            Title = title;
+            Description = description;
+            ScheduledDate = scheduleDate;
+            Status = status;
+        }
+
         [Key]
         public Guid Id { get; set; }
         [Required]
@@ -27,8 +45,8 @@ namespace RPGHub.Domain
         public GameType GameType { get; set; }
         [Required]
         public GameStatus Status { get; set; } = GameStatus.Pending;
-        public DateTime ScheduledDate { get; set; }
-
+        public DateTime? ScheduledDate { get; set; }
+        public DateTime CreatedDate { get; set; }
         public virtual ICollection<Character> Characters { get; set; }
         public virtual ICollection<Invitation> Invitations { get; set; }
         public virtual ICollection<ChatMessage> Chat { get; set; }
