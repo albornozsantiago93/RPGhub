@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,13 +32,17 @@ namespace RPGHub.Domain
         public string? Picture { get; set; }
 
         // JSON
+        [Column(TypeName = "Varchar(256)")]
         public string? Stats { get; set; }
+        [Column(TypeName = "Varchar(512)")]
         public string? Inventory { get; set; }
+        [Column(TypeName = "Varchar(512)")]
 
+        public string? Description { get; set; }
         // FK
         public Guid OwnerId { get; set; }
         public virtual SystemUser Owner { get; set; }
-        public Guid GameSessionId { get; set; }
+        public Guid? GameSessionId { get; set; }
         public virtual GameSession Session { get; set; }
     }
 

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RPGHub.Infrastructure;
 
@@ -11,9 +12,11 @@ using RPGHub.Infrastructure;
 namespace RPGHub.Infrastructure.Migrations
 {
     [DbContext(typeof(SqlContext))]
-    partial class SqlContextModelSnapshot : ModelSnapshot
+    [Migration("20260203093755_20260203_1037")]
+    partial class _20260203_1037
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,14 +37,11 @@ namespace RPGHub.Infrastructure.Migrations
                     b.Property<int>("Class")
                         .HasColumnType("int");
 
-                    b.Property<string>("Description")
-                        .HasColumnType("Varchar(512)");
-
                     b.Property<Guid?>("GameSessionId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Inventory")
-                        .HasColumnType("Varchar(512)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Level")
                         .HasColumnType("int");
@@ -61,7 +61,7 @@ namespace RPGHub.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Stats")
-                        .HasColumnType("Varchar(256)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

@@ -28,22 +28,34 @@ namespace RPGHub.Api.Controllers
             Character character = await _mapper.MapCharacterModelToEntity(model, CurrentLanguage);
 
             Guid ? guid = GetCurrentUserId();
-            string msg;
+            string msg = string.Empty;
 
-            Logic.CharacterLogic.CharacterCreate(character, guid.Value, out msg);
-            Logic.CharacterLogic.AddCharacterToUser(character, guid.Value, out msg);
-
-            return Ok(msg);
+            if(Logic.CharacterLogic.CharacterCreate(character, guid.Value, out msg))
+            {
+                Logic.CharacterLogic.AddCharacterToUser(character, guid.Value, out msg); return Ok();
+            }
+            return BadRequest(msg);
         }
 
-        //[HttpGet("{userId}")]
-        //public async Task<ActionResult<GetUserModel>> GetUserById(Guid userId)
-        //{
-        //    SystemUser user = await Logic.UserLogic.GetUserById(userId);
+        [HttpGet("{characterId}")]
+        public async Task<ActionResult<GetCharacterModel>> GetCharacterById(Guid characterId)
+        {
+            Character character = await Logic.CharacterLogic.GetCharacterById(characterId);
 
-        //    GetUserModel model = _mapper.MapTo<GetUserModel>(user, CurrentLanguage);
+            GetCharacterModel model = _mapper.MapTo<GetCharacterModel>(character, CurrentLanguage);
 
-        //    return Ok(model);
-        //}
+            return Ok(model);
+        }
+
+        [HttpGet()]
+        public async Task<ActionResult<List<GetCharacterModel>>> GetCharacters()
+        {
+            List<Character> characters = await Logic.CharacterLogic.GetCharacters();
+
+            List<GetCharacterModel> ret = _mapper.MapTo<List<GetCharacterModel>>(characters, CurrentLanguage);
+
+            return Ok(ret);
+        }
+
     }
 }

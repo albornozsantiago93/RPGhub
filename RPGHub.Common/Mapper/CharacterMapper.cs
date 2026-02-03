@@ -24,7 +24,9 @@ namespace RPGHub.Common
         {
             MapperConfigurationExpression config = new MapperConfigurationExpression();
 
-            //config.CreateMap<Country, CountryModel>();
+            config.CreateMap<Character, GetCharacterModel>()
+                .ForMember(dest => dest.Class, opt => opt.MapFrom(src => src.Class!= null ? src.Class.ToString(): null))
+                .ForMember(dest => dest.Race, opt => opt.MapFrom(src => src.Race != null ? src.Race.ToString() : null)); 
 
             return config;
         }
