@@ -12,17 +12,19 @@ namespace RPGHub.Api.Controllers
 
         private readonly ILogger<UserController> _logger;
         private UserMapper _mapper;
+        private SecurityMapper _securityMapper;
 
         public UserController(ILogger<UserController> logger, ISqlContext context, ILogicProxy logicProxy, IHttpContextAccessor httpContextAccessor)
             : base(context, new UserMapper(logicProxy), httpContextAccessor, logicProxy)
         {
             _logger = logger;
             _mapper = new UserMapper(logicProxy);
+            _securityMapper = new SecurityMapper(logicProxy);
         }
 
         [AllowAnonymous]
         [HttpPost()]
-        public async Task<ActionResult> CreateUser(CreateUserModel model)
+        public async Task<ActionResult<UserModel>> CreateUser(CreateUserModel model)
         {
             if (await Logic.UserLogic.UserExist(model.Email)) return BadRequest("El usuario ya existe");
 
@@ -30,7 +32,10 @@ namespace RPGHub.Api.Controllers
 
             Logic.UserLogic.UserCreate(systemUser);
 
-            return Ok();
+            var user = await Logic.SecurityLogic.UserViewsGetByEmail(model.Email);
+            var ret = await Logic.SecurityLogic.BuildUserModelWithToken(user, CurrentLanguage, _securityMapper);
+
+            return Ok(ret);
         }
 
         [AllowAnonymous]

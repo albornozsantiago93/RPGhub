@@ -31,6 +31,7 @@ namespace RPGHub.Common
         public async Task<Character> MapCharacterModelToEntity(CreateCharacterModel model, string currentLanguage)
         {
             Character character = new Character(model.Name, model.Picture, (Class)model.Class, (Race)model.Race);
+            character.Level = 1;
 
             return character;
         }

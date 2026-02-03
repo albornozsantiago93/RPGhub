@@ -1,9 +1,10 @@
-﻿using RPGHub.Common.Config;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using RPGHub.Common;
+using RPGHub.Common.Config;
 using RPGHub.Common.Logic;
 using RPGHub.Domain;
 using RPGHub.Infrastructure;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -32,6 +33,7 @@ namespace RPGHub.Application.Logic
             return await _context.PlatformPermission.ToListAsync();
         }
 
+        #region Token Generation
         /// <summary>
         /// Genera un token JWT para el usuario especificado con los claims proporcionados.
         /// </summary>
@@ -125,6 +127,34 @@ namespace RPGHub.Application.Logic
         {
             return GetToken(user.CountryId, user.Email, user.FullName, user.Id, true, permissions, out ttl);
         }
+
+        /// <summary>
+        /// Builds a <see cref="UserModel"/> for the specified user, including a security token and its expiration time.
+        /// </summary>
+        /// <remarks>The generated token is included in the returned <see cref="UserModel"/> along with
+        /// its expiration time,  which is calculated based on the token's time-to-live (TTL).</remarks>
+        /// <param name="user">The user for whom the <see cref="UserModel"/> is being built. Cannot be <see langword="null"/>.</param>
+        /// <param name="language">The language to be used for localization purposes.</param>
+        /// <param name="securityMapper">An instance of <see cref="SecurityMapper"/> used to map the user and their permissions to a <see
+        /// cref="UserModel"/>.</param>
+        /// <returns>A <see cref="UserModel"/> containing the user's details, roles, permissions, a generated security token, and
+        /// its expiration time. Returns <see langword="null"/> if <paramref name="user"/> is <see langword="null"/>.</returns>
+        public async Task<UserModel> BuildUserModelWithToken(UserView user, string language, SecurityMapper securityMapper)
+        {
+            if (user == null) return null;
+
+            var permissions = await GetPermissionsByUserId(user.Id);
+            var roles = new List<string> { user.Role?.ToString() ?? string.Empty };
+
+            var ret = securityMapper.MapToUserModel(user, roles, permissions, language);
+
+            int ttl = 0;
+            ret.Token = GetToken(user, permissions, out ttl);
+            ret.TokenExpiration = DateTime.UtcNow.AddMinutes(ttl);
+
+            return ret;
+        }
+        #endregion
 
     }
 }

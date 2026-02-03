@@ -28,11 +28,11 @@ namespace RPGHub.Domain
         public Class Class { get; set; }
         public Race Race { get; set; }
         public int Level { get; set; } = 1;
-        public string Picture { get; set; }
+        public string? Picture { get; set; }
 
         // JSON
-        public string Stats { get; set; }
-        public string Inventory { get; set; }
+        public string? Stats { get; set; }
+        public string? Inventory { get; set; }
 
         // FK
         public Guid OwnerId { get; set; }

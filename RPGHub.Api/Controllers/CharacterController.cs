@@ -7,6 +7,7 @@ namespace RPGHub.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
     public class CharacterController : BaseController
     {
 
@@ -23,11 +24,16 @@ namespace RPGHub.Api.Controllers
         [HttpPost()]
         public async Task<ActionResult> CreateCharacter(CreateCharacterModel model)
         {
+            //Falta logica para asignar el owner y demas campos
             Character character = await _mapper.MapCharacterModelToEntity(model, CurrentLanguage);
 
-            //Logic.CharacterLogic.CharacterCreate(character);
+            Guid ? guid = GetCurrentUserId();
+            string msg;
 
-            return Ok();
+            Logic.CharacterLogic.CharacterCreate(character, guid.Value, out msg);
+            Logic.CharacterLogic.AddCharacterToUser(character, guid.Value, out msg);
+
+            return Ok(msg);
         }
 
         //[HttpGet("{userId}")]

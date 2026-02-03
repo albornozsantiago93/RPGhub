@@ -35,16 +35,9 @@ namespace RPGHub.Api.Controllers
             string passwordHased = Encrypt.GetSHA256(credentials.Password);//Falta encriptar la contraseña recibida y compararla con la de la BD
 
             //Falta SP para obtener roles y permisos
-            var permissions = await Logic.SecurityLogic.GetPermissionsByUserId(user.Id);
-            var roles = new List<string> { user.Role.ToString() };
+            var userModel = await Logic.SecurityLogic.BuildUserModelWithToken(user, CurrentLanguage, _mapper);
 
-            var ret = _mapper.MapToUserModel(user, roles, permissions, CurrentLanguage);
-
-            int ttl = 0;
-            ret.Token = Logic.SecurityLogic.GetToken(user, permissions, out ttl);
-            ret.TokenExpiration = DateTime.UtcNow.AddMinutes(ttl);
-
-            return Ok(ret);
+            return Ok(userModel);
         }
 
         [HttpGet("hashFactory")]

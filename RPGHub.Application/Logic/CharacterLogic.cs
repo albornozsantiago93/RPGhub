@@ -14,26 +14,65 @@ namespace RPGHub.Application.Logic
         {
             _context = context;
         }
+        public bool CharacterCreate(Character character, Guid userId, out string error)
+        {
+            SystemUser user = _context.SystemUser.Where(x => x.Id == userId).FirstOrDefault();
 
-        //public async Task <bool> UserExist(string email)
-        //{
-        //    return await _context.SystemUser.Where(x => x.Email == email).FirstOrDefaultAsync() != null;
-        //}
+            // Validación: ¿ya existe un personaje con el mismo nombre para este usuario?
+            if (user.Characters.Any(c => c.Name == character.Name))
+            {
+                error = "Ya existe un personaje con ese nombre para este usuario.";
+                return false;
+            }
 
-        //public SystemUser UserCreate(SystemUser user)
-        //{
-        //    _context.SystemUser.Add(user);
-        //    _context.SaveChanges();
+            character.OwnerId = userId;
+            _context.Character.Add(character);
 
-        //    return user;
-        //}
+            try
+            {
+                _context.SaveChanges();
+                error = null;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                error = $"Error al guardar el personaje: {ex.Message}";
+                return false;
+            }
+        }
 
-        //public Task<SystemUser> GetUserById(Guid userId)
-        //{
-        //    return _context.SystemUser.Where(x => x.Id == userId).FirstOrDefaultAsync();
-        //}
+        // Si quieres mantener el método separado:
+        public bool AddCharacterToUser(Character character, Guid userId, out string error)
+        {
+            error = null;
 
+            if (character == null)
+            {
+                error = "El personaje no puede ser nulo.";
+                return false;
+            }
 
+            var user = _context.SystemUser.Include(x => x.Characters).FirstOrDefault(x => x.Id == userId);
 
+            // Validación: ¿ya existe un personaje con el mismo nombre para este usuario?
+            if (user.Characters.Any(c => c.Name == character.Name))
+            {
+                error = "Ya existe un personaje con ese nombre para este usuario.";
+                return false;
+            }
+
+            user.Characters.Add(character);
+
+            try
+            {
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                error = $"Error al guardar el personaje: {ex.Message}";
+                return false;
+            }
+        }
     }
 }

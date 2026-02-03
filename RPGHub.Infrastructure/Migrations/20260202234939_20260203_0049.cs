@@ -21,9 +21,7 @@ namespace RPGHub.Infrastructure.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "Picture",
-                table: "Character");
+
         }
     }
 }

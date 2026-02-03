@@ -40,7 +40,7 @@ namespace RPGHub.Common
 
             user.Role = RoleType.Player;
             user.CreatedUser = model.Email;
-            user.Language = currentLanguage;
+            user.Language = model.Language;
             user.ModifiedUser = model.Email;
 
             return user;
