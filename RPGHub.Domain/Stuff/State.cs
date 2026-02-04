@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RPGHub.Domain.Stuff
+namespace RPGHub.Domain
 {
     public class State
     {

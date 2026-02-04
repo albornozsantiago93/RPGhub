@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata;
+using RPGHub.Domain.Stuff;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -16,7 +17,7 @@ namespace RPGHub.Domain
         {
             Invitations = new List<Invitation>();
             Chat = new List<ChatMessage>();
-            Logs = new List<Log>();
+            Logs = new List<LogHistory>();
             Participants = new List<GameSessionParticipant>();
             CreatedDate = DateTime.UtcNow;
         }
@@ -42,7 +43,7 @@ namespace RPGHub.Domain
         public DateTime CreatedDate { get; set; }
         public virtual ICollection<Invitation> Invitations { get; set; }
         public virtual ICollection<ChatMessage> Chat { get; set; }
-        public virtual ICollection<Log> Logs { get; set; }
+        public virtual ICollection<LogHistory> Logs { get; set; }
         public virtual ICollection<GameSessionParticipant> Participants { get; set; }
     }
 
