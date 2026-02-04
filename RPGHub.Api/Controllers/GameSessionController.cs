@@ -26,7 +26,7 @@ namespace RPGHub.Api.Controllers
             Guid ? userId = GetCurrentUserId();
             if ( userId ==  null) return BadRequest("User is mandatory");
 
-            var gameSession = await _mapper.MapCreateGameSessionModelToGameSession(model);
+            GameSession gameSession = await _mapper.MapCreateGameSessionModelToGameSession(model);
 
             await Logic.GameSessionLogic.CreateGameSession(gameSession, userId.Value);
 

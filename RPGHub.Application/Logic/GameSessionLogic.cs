@@ -17,8 +17,26 @@ namespace RPGHub.Application.Logic
 
         public async Task CreateGameSession(GameSession gameSession, Guid userId)
         {
-            _context.GameSession.Add(gameSession);
-            _context.SaveChangesAsync();
+            if (gameSession.Id == Guid.Empty)
+            {
+                gameSession.Id = Guid.NewGuid();
+            }
+
+            gameSession.MasterId = userId;
+
+            await _context.GameSession.AddAsync(gameSession);
+            await _context.SaveChangesAsync();
+
+            GameSessionParticipant participant = new GameSessionParticipant();
+
+            participant.GameSession = gameSession;
+            participant.GameSessionId = gameSession.Id;
+            participant.SystemUserId = userId;
+            participant.SystemUser = gameSession.Master;
+            participant.JoinedAt = DateTime.UtcNow;
+
+            await _context.GameSessionParticipant.AddAsync(participant);
+            await _context.SaveChangesAsync();
         }
 
     }

@@ -14,9 +14,9 @@ namespace RPGHub.Domain
         public DateTime? ModifiedDate { get; set; }
 
         [Column(TypeName = "Varchar(128)")]
-        public string CreatedUser { get; set; }
+        public string? CreatedUser { get; set; }
 
         [Column(TypeName = "Varchar(128)")]
-        public string ModifiedUser { get; set; }
+        public string? ModifiedUser { get; set; }
     }
 }
