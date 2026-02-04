@@ -1,6 +1,5 @@
 ﻿using RPGHub.Common;
 using RPGHub.Domain;
-using RPGHub.Domain.Stuff;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 

@@ -32,5 +32,17 @@ namespace RPGHub.Api.Controllers
 
             return Ok();
         }
+
+        [HttpPost("{gameSessionId}/player")]
+        public async Task<ActionResult> AddPlayerToGameSession(AddPlayerToGameSessionModel model, Guid gameSessionId)
+        {
+            Guid? userId = GetCurrentUserId();
+            if (userId == null) return BadRequest("User is mandatory");
+
+            await Logic.GameSessionLogic.AddPlayerToGameSession(gameSessionId, model.CharacterId, model.Role, userId.Value);
+
+
+            return Ok();
+        }
     }
 }

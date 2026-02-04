@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata;
-using RPGHub.Domain.Stuff;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -41,6 +40,7 @@ namespace RPGHub.Domain
         public GameStatus Status { get; set; } = GameStatus.Pending;
         public DateTime? ScheduledDate { get; set; }
         public DateTime CreatedDate { get; set; }
+        public int? CurrentChapterOrder { get; set; }
         public virtual ICollection<Invitation> Invitations { get; set; }
         public virtual ICollection<ChatMessage> Chat { get; set; }
         public virtual ICollection<LogHistory> Logs { get; set; }

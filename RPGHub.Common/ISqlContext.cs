@@ -1,5 +1,4 @@
 ﻿using RPGHub.Domain;
-using RPGHub.Domain.Stuff;
 using Microsoft.EntityFrameworkCore;
 
 namespace RPGHub.Common
