@@ -14,7 +14,6 @@ namespace RPGHub.Domain
     {
         public GameSession()
         {
-            Characters = new List<Character>();
             Invitations = new List<Invitation>();
             Chat = new List<ChatMessage>();
             Logs = new List<Log>();
@@ -32,12 +31,6 @@ namespace RPGHub.Domain
 
         [Key]
         public Guid Id { get; set; }
-        [Required]
-        public Guid MasterId { get; set; }
-
-        [ForeignKey(nameof(MasterId))]
-        public virtual SystemUser Master { get; set; }
-
         [Required, MaxLength(60)]
         public string Title { get; set; }
         public string Description { get; set; }
@@ -47,7 +40,6 @@ namespace RPGHub.Domain
         public GameStatus Status { get; set; } = GameStatus.Pending;
         public DateTime? ScheduledDate { get; set; }
         public DateTime CreatedDate { get; set; }
-        public virtual ICollection<Character> Characters { get; set; }
         public virtual ICollection<Invitation> Invitations { get; set; }
         public virtual ICollection<ChatMessage> Chat { get; set; }
         public virtual ICollection<Log> Logs { get; set; }

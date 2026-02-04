@@ -30,8 +30,6 @@ namespace RPGHub.Common
         public async Task<GameSession> MapCreateGameSessionModelToGameSession(CreateGameSessionModel model)
         {
             GameSession gameSession = new GameSession(model.Title, model.Description, model.ScheduleDate, GameStatus.Pending);
-            gameSession.Master = await Logic.UserLogic.GetUserById(model.MasterId);
-            gameSession.MasterId = gameSession.Master.Id;
             gameSession.GameType = (GameType)model.GameType;
 
             return gameSession;

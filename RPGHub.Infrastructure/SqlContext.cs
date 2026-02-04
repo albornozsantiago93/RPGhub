@@ -33,13 +33,6 @@ namespace RPGHub.Infrastructure
                 entity.ToView("UserView"); // El nombre de la vista en la base de datos
             });
 
-            modelBuilder.Entity<GameSession>()
-                .HasOne(gs => gs.Master)
-                .WithMany(su => su.SessionsOwned)
-                .HasForeignKey(gs => gs.MasterId)
-                .OnDelete(DeleteBehavior.Restrict
-            ); // O el comportamiento que prefieras
-
         }
 
         #region Entities

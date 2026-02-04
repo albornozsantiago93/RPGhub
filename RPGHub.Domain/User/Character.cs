@@ -12,9 +12,9 @@ namespace RPGHub.Domain
     {
         public Character()
         {
-            
+            Participations = new List<GameSessionParticipant>();    
         }
-        public Character(string name, string picture, Class classAux, Race race)
+        public Character(string name, string picture, Class classAux, Race race) :this()
         {
             Name  = name;
             Picture = picture;
@@ -41,9 +41,8 @@ namespace RPGHub.Domain
         public string? Description { get; set; }
         // FK
         public Guid OwnerId { get; set; }
-        public virtual SystemUser Owner { get; set; }
-        public Guid? GameSessionId { get; set; }
-        public virtual GameSession Session { get; set; }
+        public virtual ICollection<GameSessionParticipant> Participations { get; set; }
+
     }
 
 }

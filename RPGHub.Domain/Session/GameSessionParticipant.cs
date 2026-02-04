@@ -12,9 +12,14 @@ namespace RPGHub.Domain
         public Guid GameSessionId { get; set; }
         [ForeignKey(nameof(GameSessionId))]
         public virtual GameSession GameSession { get; set; }
-        public Guid SystemUserId { get; set; }
-        [ForeignKey(nameof(SystemUserId))]
-        public virtual SystemUser SystemUser { get; set; }
+        public Guid UserId { get; set; }
+        [ForeignKey(nameof(UserId))]
+        public virtual SystemUser User { get; set; }
         public DateTime JoinedAt { get; set; } = DateTime.UtcNow;
+        public RoleType Role { get; set; }
+        public Guid CharacterId { get; set; }
+        public virtual Character Character { get; set; }
+        public int? ChurrentChapterOrder { get; set; }
+
     }
 }

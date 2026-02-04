@@ -22,20 +22,7 @@ namespace RPGHub.Application.Logic
                 gameSession.Id = Guid.NewGuid();
             }
 
-            gameSession.MasterId = userId;
-
             await _context.GameSession.AddAsync(gameSession);
-            await _context.SaveChangesAsync();
-
-            GameSessionParticipant participant = new GameSessionParticipant();
-
-            participant.GameSession = gameSession;
-            participant.GameSessionId = gameSession.Id;
-            participant.SystemUserId = userId;
-            participant.SystemUser = gameSession.Master;
-            participant.JoinedAt = DateTime.UtcNow;
-
-            await _context.GameSessionParticipant.AddAsync(participant);
             await _context.SaveChangesAsync();
         }
 
