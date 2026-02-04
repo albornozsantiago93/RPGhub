@@ -2,15 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Security.AccessControl;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RPGHub.Domain
 {
-    public class GameSession 
+    public class GameSession
     {
         public GameSession()
         {
@@ -21,7 +16,7 @@ namespace RPGHub.Domain
             CreatedDate = DateTime.UtcNow;
         }
 
-        public GameSession(string title, string description, DateTime scheduleDate, GameStatus status):this()
+        public GameSession(string title, string description, DateTime scheduleDate, GameStatus status) : this()
         {
             Title = title;
             Description = description;
@@ -56,11 +51,11 @@ namespace RPGHub.Domain
 
     public enum GameType
     {
-        DnD =1,
-        Pathfinder=2,
-        Warhammer=3,
-        CallOfCthulhu=4,
-        Custom=5
+        DnD = 1,
+        Pathfinder = 2,
+        Warhammer = 3,
+        CallOfCthulhu = 4,
+        Custom = 5
     }
 
 }

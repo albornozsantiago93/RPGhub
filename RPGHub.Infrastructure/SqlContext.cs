@@ -1,11 +1,13 @@
-﻿using RPGHub.Common;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using RPGHub.Common;
 using RPGHub.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace RPGHub.Infrastructure
 {
-    public class SqlContext : DbContext , ISqlContext
+    public class SqlContext : DbContext, ISqlContext
     {
         private readonly IConfiguration _configuration;
         public SqlContext(DbContextOptions<SqlContext> options, IConfiguration configuration) : base(options)

@@ -1,4 +1,5 @@
-﻿using RPGHub.Domain;
+﻿using Microsoft.EntityFrameworkCore;
+using RPGHub.Domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace RPGHub.Common
