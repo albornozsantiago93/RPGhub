@@ -10,5 +10,6 @@ namespace RPGHub.Common
         public ISecurityLogic SecurityLogic { get; }
         public ICharacterLogic CharacterLogic { get; }
         public IGameSessionLogic GameSessionLogic { get; }
+        public IInvitationLogic InvitationLogic { get; }
     }
 }

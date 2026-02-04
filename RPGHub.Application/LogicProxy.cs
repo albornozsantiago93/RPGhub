@@ -12,6 +12,8 @@ namespace RPGHub.Application
         private readonly ISecurityLogic _securityLogic;
         private readonly ICharacterLogic _characterLogic;
         private readonly IGameSessionLogic _gameSessionLogic;
+        private readonly IInvitationLogic _invitationLogic;
+
         public LogicProxy(ISqlContext context)
         {
             _stuffLogic = new StuffLogic((SqlContext)context);
@@ -19,7 +21,7 @@ namespace RPGHub.Application
             _securityLogic = new SecurityLogic((SqlContext)context);
             _characterLogic = new CharacterLogic((SqlContext)context);
             _gameSessionLogic = new GameSessionLogic((SqlContext)context);
-
+            _invitationLogic = new InvitationLogic((SqlContext)context);
         }
 
         public IStuffLogic StuffLogic => _stuffLogic;
@@ -27,6 +29,7 @@ namespace RPGHub.Application
         public ISecurityLogic SecurityLogic => _securityLogic;
         public ICharacterLogic CharacterLogic => _characterLogic;
         public IGameSessionLogic GameSessionLogic => _gameSessionLogic;
+        public IInvitationLogic InvitationLogic => _invitationLogic;
 
 
     }
