@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -13,26 +14,27 @@ namespace RPGHub.Domain
         {
             
         }
-        public GameSessionParticipant(GameSession gameSession, SystemUser player, Character character, RoleType role)
+        public GameSessionParticipant(GameSession gameSession, Character character, RoleType role)
         {
             GameSession = gameSession;
-            User = player;
             Character = character;
             Role = role;
             GameSessionId = gameSession.Id;
-            UserId = player.Id;
+            UserId = character.SystemUser.Id;
             CharacterId = character.Id;
         }
+        [Required]
         public Guid GameSessionId { get; set; }
         [ForeignKey(nameof(GameSessionId))]
         public virtual GameSession GameSession { get; set; }
-        public DateTime JoinedAt { get; set; } = DateTime.UtcNow;
-        public RoleType Role { get; set; }
-        public Guid CharacterId { get; set; }
-        public virtual Character Character { get; set; }
-        public Guid UserId { get; set; }
         [ForeignKey(nameof(UserId))]
-        public virtual SystemUser User { get; set; }
+        public Guid UserId { get; set; }
+        [Required]
+        public Guid CharacterId { get; set; }
+        [ForeignKey(nameof(CharacterId))]
+        public virtual Character Character { get; set; }
+        public RoleType Role { get; set; }
+        public DateTime JoinedAt { get; set; } = DateTime.UtcNow;
 
     }
 }

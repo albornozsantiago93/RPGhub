@@ -18,6 +18,7 @@ namespace RPGHub.Common
         public DbSet<ChatMessage> ChatMessage { get; set; }
         public DbSet<GameSessionParticipant> GameSessionParticipant { get; set; }
         public DbSet<LogHistory> Log { get; set; }
+        public DbSet<GameCfg> GameCfg { get; set; }
 
         #endregion
 

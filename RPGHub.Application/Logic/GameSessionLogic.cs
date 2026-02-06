@@ -35,13 +35,17 @@ namespace RPGHub.Application.Logic
         public async Task AddPlayerToGameSession(Guid gameSessionId, Guid characterId, RoleType role, Guid userId)
         {
             GameSession gameSession = await GetGameSessionById(gameSessionId);
-            SystemUser player = await _context.SystemUser.FirstOrDefaultAsync(x => x.Id == userId);
-            Character character = await _context.Character.FirstOrDefaultAsync(x => x.Id == characterId && x.OwnerId == userId);
+            Character character = await _context.Character.FirstOrDefaultAsync(x => x.Id == characterId && x.SystemUser.Id == userId);
 
-            GameSessionParticipant gameSessionParticipant = new GameSessionParticipant(gameSession, player, character, role);
+            GameSessionParticipant gameSessionParticipant = new GameSessionParticipant(gameSession, character, role);
 
             await _context.GameSessionParticipant.AddAsync(gameSessionParticipant);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<GameCfg> GetGameCfgById(int gameCfgId)
+        {
+            return await _context.GameCfg.FirstOrDefaultAsync(x => x.Id == gameCfgId);
         }
     }
 }

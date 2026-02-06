@@ -26,14 +26,15 @@ namespace RPGHub.Common
 
             config.CreateMap<Character, GetCharacterModel>()
                 .ForMember(dest => dest.Class, opt => opt.MapFrom(src => src.Class!= null ? src.Class.ToString(): null))
-                .ForMember(dest => dest.Race, opt => opt.MapFrom(src => src.Race != null ? src.Race.ToString() : null)); 
+                .ForMember(dest => dest.Race, opt => opt.MapFrom(src => src.Race != null ? src.Race.ToString() : null))
+                .ForMember(dest => dest.OwnerId, opt => opt.MapFrom(src => src.SystemUser.Id)); 
 
             return config;
         }
-        public async Task<Character> MapCharacterModelToEntity(CreateCharacterModel model, string currentLanguage)
+        public async Task<Character> MapCharacterModelToEntity(CreateCharacterModel model, Guid currentUserId)
         {
             Character character = new Character(model.Name, model.Picture, (Class)model.Class, (Race)model.Race);
-            character.Level = 1;
+            character.SystemUser = await Logic.UserLogic.GetUserById(currentUserId);
 
             return character;
         }

@@ -24,11 +24,11 @@ namespace RPGHub.Api.Controllers
         [HttpPost()]
         public async Task<ActionResult> CreateCharacter(CreateCharacterModel model)
         {
-            //Falta logica para asignar el owner y demas campos
-            Character character = await _mapper.MapCharacterModelToEntity(model, CurrentLanguage);
-
             Guid ? guid = GetCurrentUserId();
             string msg = string.Empty;
+
+            Character character = await _mapper.MapCharacterModelToEntity(model, guid.Value);
+
 
             if(Logic.CharacterLogic.CharacterCreate(character, guid.Value, out msg))
             {

@@ -45,7 +45,7 @@ namespace RPGHub.Application.Logic
 
             // Validación directa en la base de datos, ignorando mayúsculas/minúsculas y espacios
             bool exists = _context.Character
-                .Any(c => c.OwnerId == userId &&
+                .Any(c => c.SystemUser.Id == userId &&
                           c.Name.Trim().ToLower() == character.Name.Trim().ToLower());
 
             if (exists)
@@ -53,9 +53,6 @@ namespace RPGHub.Application.Logic
                 error = "Ya existe un personaje con ese nombre para este usuario.";
                 return false;
             }
-
-            character.OwnerId = userId;
-            character.Level = 1;
 
             _context.Character.Add(character);
 
@@ -98,7 +95,7 @@ namespace RPGHub.Application.Logic
 
             var user = _context.SystemUser.Include(x => x.Characters).FirstOrDefault(x => x.Id == userId);
 
-            bool exists = _context.Character.Any(c => c.OwnerId == userId && c.Name.Trim().ToLower() == character.Name.Trim().ToLower());
+            bool exists = _context.Character.Any(c => c.SystemUser.Id == userId && c.Name.Trim().ToLower() == character.Name.Trim().ToLower());
 
             if (exists)
             {

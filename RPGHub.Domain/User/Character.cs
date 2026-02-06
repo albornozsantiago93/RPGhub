@@ -12,7 +12,8 @@ namespace RPGHub.Domain
     {
         public Character()
         {
-            Participations = new List<GameSessionParticipant>();    
+            Participations = new List<GameSessionParticipant>();
+            Level = 1;
         }
         public Character(string name, string picture, Class classAux, Race race) :this()
         {
@@ -30,17 +31,16 @@ namespace RPGHub.Domain
         public Race Race { get; set; }
         public int Level { get; set; } = 1;
         public string? Picture { get; set; }
-
         // JSON
         [Column(TypeName = "Varchar(256)")]
         public string? Stats { get; set; }
         [Column(TypeName = "Varchar(512)")]
         public string? Inventory { get; set; }
         [Column(TypeName = "Varchar(512)")]
-
         public string? Description { get; set; }
-        // FK
-        public Guid OwnerId { get; set; }
+        public Guid UserId { get; set; }
+        [ForeignKey(nameof(UserId))]
+        public virtual SystemUser SystemUser { get; set; }
         public virtual ICollection<GameSessionParticipant> Participations { get; set; }
 
     }

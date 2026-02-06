@@ -10,8 +10,8 @@ namespace RPGHub.Common
     {
         public string Title { get; set; }    
         public string Description { get; set; }
+        public int GameCfgId { get; set; }
         public Guid MasterId { get; set; }
-        public int GameType { get; set; }
         public DateTime ScheduleDate { get; set; }
 
     }

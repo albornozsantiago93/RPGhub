@@ -13,7 +13,7 @@ namespace RPGHub.Domain
         public SystemUser()
         {
             Characters = new List<Character>();
-            GameSessions = new List<GameSessionParticipant>();
+            GameSessions = new List<GameSession>();
         }
 
         public SystemUser(string firstname, string lastname, string email, DateTime? birthDate, string username, Country country, string language, string picture, string password) :this()
@@ -27,6 +27,7 @@ namespace RPGHub.Domain
             Language = language;
             Picture = picture;
             Password = password;
+            IsActive = true;
         }
 
         [InverseProperty("SystemUser")]
@@ -38,10 +39,8 @@ namespace RPGHub.Domain
         public string Username { get; set; }
         public bool IsActive { get; set; }
         public RoleType Role { get; set; }
-        public virtual List<Character> Characters { get; set; }
-
-        [InverseProperty("User")]
-        public virtual List<GameSessionParticipant> GameSessions { get; set; }
+        public virtual ICollection<Character> Characters { get; set; }
+        public virtual ICollection<GameSession> GameSessions { get; set; }
 
     }
 
@@ -49,6 +48,7 @@ namespace RPGHub.Domain
     {
         Admin = 1, 
         Moderator = 2,
-        Player = 3
+        Master = 3,
+        Player = 4
     }
 }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RPGHub.Infrastructure;
 
@@ -11,9 +12,11 @@ using RPGHub.Infrastructure;
 namespace RPGHub.Infrastructure.Migrations
 {
     [DbContext(typeof(SqlContext))]
-    partial class SqlContextModelSnapshot : ModelSnapshot
+    [Migration("20260205115855_20260205_1257")]
+    partial class _20260205_1257
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -64,7 +67,7 @@ namespace RPGHub.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Character", (string)null);
+                    b.ToTable("Character");
                 });
 
             modelBuilder.Entity("RPGHub.Domain.ChatMessage", b =>
@@ -92,7 +95,7 @@ namespace RPGHub.Infrastructure.Migrations
 
                     b.HasIndex("SenderId");
 
-                    b.ToTable("ChatMessage", (string)null);
+                    b.ToTable("ChatMessage");
                 });
 
             modelBuilder.Entity("RPGHub.Domain.Country", b =>
@@ -128,7 +131,7 @@ namespace RPGHub.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Country", (string)null);
+                    b.ToTable("Country");
                 });
 
             modelBuilder.Entity("RPGHub.Domain.GameCfg", b =>
@@ -163,7 +166,7 @@ namespace RPGHub.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("GameCfg", (string)null);
+                    b.ToTable("GameCfg");
                 });
 
             modelBuilder.Entity("RPGHub.Domain.GameSession", b =>
@@ -203,7 +206,7 @@ namespace RPGHub.Infrastructure.Migrations
 
                     b.HasIndex("MasterId");
 
-                    b.ToTable("GameSession", (string)null);
+                    b.ToTable("GameSession");
                 });
 
             modelBuilder.Entity("RPGHub.Domain.GameSessionParticipant", b =>
@@ -247,7 +250,7 @@ namespace RPGHub.Infrastructure.Migrations
 
                     b.HasIndex("GameSessionId");
 
-                    b.ToTable("GameSessionParticipant", (string)null);
+                    b.ToTable("GameSessionParticipant");
                 });
 
             modelBuilder.Entity("RPGHub.Domain.Invitation", b =>
@@ -288,7 +291,7 @@ namespace RPGHub.Infrastructure.Migrations
 
                     b.HasIndex("InvitedUserId");
 
-                    b.ToTable("Invitation", (string)null);
+                    b.ToTable("Invitation");
                 });
 
             modelBuilder.Entity("RPGHub.Domain.LearningUser", b =>
@@ -350,7 +353,7 @@ namespace RPGHub.Infrastructure.Migrations
 
                     b.HasIndex("CountryId");
 
-                    b.ToTable("LearningUser", (string)null);
+                    b.ToTable("LearningUser");
                 });
 
             modelBuilder.Entity("RPGHub.Domain.LogHistory", b =>
@@ -395,7 +398,7 @@ namespace RPGHub.Infrastructure.Migrations
 
                     b.HasIndex("GameSessionId");
 
-                    b.ToTable("Log", (string)null);
+                    b.ToTable("Log");
                 });
 
             modelBuilder.Entity("RPGHub.Domain.PlatformPermission", b =>
@@ -427,7 +430,7 @@ namespace RPGHub.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PlatformPermission", (string)null);
+                    b.ToTable("PlatformPermission");
                 });
 
             modelBuilder.Entity("RPGHub.Domain.State", b =>
@@ -447,7 +450,7 @@ namespace RPGHub.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("State", (string)null);
+                    b.ToTable("State");
                 });
 
             modelBuilder.Entity("RPGHub.Domain.SystemUser", b =>
@@ -523,7 +526,7 @@ namespace RPGHub.Infrastructure.Migrations
 
                     b.HasIndex("CountryId");
 
-                    b.ToTable("SystemUser", (string)null);
+                    b.ToTable("SystemUser");
                 });
 
             modelBuilder.Entity("RPGHub.Domain.SystemUserPlatformPermision", b =>
@@ -558,7 +561,7 @@ namespace RPGHub.Infrastructure.Migrations
 
                     b.HasIndex("SystemuserId");
 
-                    b.ToTable("SystemUserPlatformPermision", (string)null);
+                    b.ToTable("SystemUserPlatformPermision");
                 });
 
             modelBuilder.Entity("RPGHub.Domain.UserView", b =>
@@ -604,7 +607,7 @@ namespace RPGHub.Infrastructure.Migrations
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("UserView", (string)null);
+                    b.ToTable("UserView");
                 });
 
             modelBuilder.Entity("RPGHub.Domain.Character", b =>
