@@ -47,5 +47,11 @@ namespace RPGHub.Application.Logic
         {
             return await _context.GameCfg.FirstOrDefaultAsync(x => x.Id == gameCfgId);
         }
+
+        public async Task CloseGameSession(Guid gameSessionId)
+        {
+            _context.Update(new GameSession() { Id = gameSessionId, Status = GameSessionStatus.Finished });
+            await _context.SaveChangesAsync();
+        }
     }
 }

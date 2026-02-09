@@ -2,8 +2,6 @@
 using Microsoft.Extensions.Configuration;
 using RPGHub.Common;
 using RPGHub.Domain;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace RPGHub.Infrastructure
 {

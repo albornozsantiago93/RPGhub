@@ -1,10 +1,5 @@
 ﻿using AutoMapper.Configuration;
 using RPGHub.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RPGHub.Common
 {
@@ -31,6 +26,8 @@ namespace RPGHub.Common
         {
             GameSession gameSession = new GameSession(model.Title, model.Description, model.ScheduleDate, GameSessionStatus.Pending, model.GameCfgId);
             gameSession.GameCfg = await Logic.GameSessionLogic.GetGameCfgById(model.GameCfgId);
+            gameSession.Master = await Logic.UserLogic.GetUserById(model.MasterId);
+            gameSession.MasterId = model.MasterId;
 
             return gameSession;
         }
