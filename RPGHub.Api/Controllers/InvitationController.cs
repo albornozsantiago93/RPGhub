@@ -1,7 +1,8 @@
-using RPGHub.Common;
-using Microsoft.AspNetCore.Mvc;
-using RPGHub.Domain;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using RPGHub.Common;
+using RPGHub.Common.DTOs;
+using RPGHub.Domain;
 
 namespace RPGHub.Api.Controllers
 {
@@ -20,6 +21,15 @@ namespace RPGHub.Api.Controllers
             _mapper = new InvitationMapper(logicProxy);
         }
 
+        [HttpPost()]
+        public async Task<ActionResult<int>> InviteUser(InviteUserModel model)
+        {
+            Guid? user = GetCurrentUserId();
+            if (user == null) return BadRequest("Usuario no autorizado");
 
+            var invitation = await Logic.InvitationLogic.InviteUserAsync(user, model.GameSessionId, model.InviteUserId);
+
+            return Ok();
+        }
     }
 }
